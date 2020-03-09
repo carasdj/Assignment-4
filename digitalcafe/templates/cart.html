@@ -2,7 +2,7 @@
         <h1>Cart</h1>
 
             {% if session["cart"] is defined %}
-            <table>
+            <table align= "center">
             <tr><th>Name</th><th>Quantity</th><th>Subtotal</th></tr>
             {% for item in session["cart"].values() %}
                         <tr><td>{{ item["name"] }}</td><td>{{ item["qty"] }}</td><td>{{ item["subtotal"] }}</td></tr>

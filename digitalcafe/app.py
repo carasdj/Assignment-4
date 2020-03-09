@@ -41,13 +41,18 @@ def addtocart():
     session["cart"]=cart
     return redirect('/cart')
 
-@app.route('/cart')
+@app.route('/cart', methods = ['POST'])
 def cart():
-    return render_template('cart.html')
+    qty = request.form.getlist("qty")
+    return render_template('cart.html',qty=qty)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     return render_template('login.html')
+
+@app.route('/errorlogin', methods=['GET', 'POST'])
+def errorlogin():
+    return render_template('errorlogin.html')
 
 @app.route('/auth', methods = ['POST'])
 def auth():
@@ -60,7 +65,7 @@ def auth():
         session["user"] = user
         return redirect('/')
     else:
-        return redirect('/login')
+        return redirect('/errorlogin')
 
 @app.route('/logout')
 def logout():
@@ -81,7 +86,6 @@ def products():
 def productdetails():
     code = request.args.get('code', '')
     product = db.get_product(int(code))
-
     return render_template('productdetails.html', code=code, product=product)
 
 @app.route('/branches')

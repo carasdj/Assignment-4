@@ -5,6 +5,11 @@
         <tr><td>Code</td><td>{{ code }}</td></tr>
         <tr><td>Description</td><td>{{ product["name"]}}</td></tr>
         <tr><td>Price</td><td>{{ product["price"]}}</td></tr>
+
+        <form action="cart" method="post">
+        <tr><td>Quantity</td><td><input type="hidden" name="code" value="100"><input type="text" name="qty" value="1"/></td></tr>
+        </form>
+
         {% if session["user"] is defined %}
           <tr><td colspan=2><a href="/addtocart?code={{ code }}">Add to Cart</a></td></tr>
         {% endif %}
